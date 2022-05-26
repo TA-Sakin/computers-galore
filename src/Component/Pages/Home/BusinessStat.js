@@ -85,7 +85,7 @@ const BusinessStat = () => {
               delay={0}
             />
           </div>
-          <div class="stat-desc">43% more than last year</div>
+          <div class="stat-desc">↗︎ 43% more than last year</div>
         </div>
 
         <div class="stat border-0">

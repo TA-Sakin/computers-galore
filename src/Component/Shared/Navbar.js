@@ -30,9 +30,9 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar fixed top-0 z-30 bg-base-100 lg:justify-around lg:px-24">
+    <div className="navbar fixed top-0 z-30 bg-slate-900 text-white lg:justify-around lg:px-24">
       <div class="navbar-start">
-        <Link to="/" class="btn btn-ghost text-gray-500 normal-case text-xl">
+        <Link to="/" class="btn btn-ghost text-gray-400 normal-case text-xl">
           Computers Galore
         </Link>
       </div>
