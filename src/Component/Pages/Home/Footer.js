@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div>
-      <footer class="footer p-10 lg:justify-around mx-auto text-white bg-slate-900">
+    <div className=" bg-slate-900">
+      <footer class="footer lg:max-w-screen-2xl p-10 lg:justify-around mx-auto text-white ">
         <div>
           <span class="footer-title">Services</span>
           <Link to="" class="link link-hover">

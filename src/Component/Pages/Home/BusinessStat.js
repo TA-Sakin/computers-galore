@@ -77,7 +77,7 @@ const BusinessStat = () => {
           <div class="stat-title">Annual Revenue</div>
           <div class="stat-value text-secondary">
             <CountUp
-              end={100}
+              end={125.5}
               decimals={1}
               duration={1}
               suffix="M+"
