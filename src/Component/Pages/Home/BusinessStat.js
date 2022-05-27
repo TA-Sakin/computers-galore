@@ -29,7 +29,7 @@ const BusinessStat = () => {
               suffix="K+"
               decimal="."
               delay={0}
-              duration={1}
+              duration={2}
             />
           </div>
           <div class="stat-desc">↗︎ 34% more than last month</div>
@@ -51,9 +51,9 @@ const BusinessStat = () => {
             </svg>
           </div>
 
-          <div class="stat-title ">Total Products</div>
+          <div class="stat-title ">Product categories</div>
           <div class="stat-value text-cyan-500">
-            <CountUp end={100} suffix="+" delay={0} duration={1} />
+            <CountUp end={100} suffix="+" delay={0} duration={2} />
           </div>
           <div class="stat-desc">All available online</div>
         </div>
@@ -79,7 +79,7 @@ const BusinessStat = () => {
             <CountUp
               end={125.5}
               decimals={1}
-              duration={1}
+              duration={2}
               suffix="M+"
               decimal="."
               delay={0}
@@ -101,14 +101,7 @@ const BusinessStat = () => {
           </div>
           <div class="stat-title">Customers satisfaction</div>
           <div class="stat-value">
-            <CountUp
-              end={99}
-              decimals={1}
-              suffix="%"
-              decimal="."
-              delay={0}
-              duration={1}
-            />
+            <CountUp end={99} suffix="%" delay={0} duration={2} />
           </div>
           <div class="stat-desc text-secondary">
             Based on 10K+ customer's review
