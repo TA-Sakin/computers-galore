@@ -19,13 +19,13 @@ const Reviews = () => {
         }`}
       >
         {tools.map((tool) => (
-          <div class="carousel-item w-[350px] ">
-            <div class="card shadow-xl bg-gray-700 image-full transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-gray-800 duration-300">
+          <div className="carousel-item w-[350px] ">
+            <div className="card shadow-xl bg-gray-700 image-full transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-gray-800 duration-300">
               <figure>
                 <img src={tool.image} alt="review" />
               </figure>
-              <div class="card-body text-[#aaaaaa]">
-                <h2 class="card-title ">{tool.name}</h2>
+              <div className="card-body text-[#aaaaaa]">
+                <h2 className="card-title ">{tool.name}</h2>
                 <p className="text-xl">Price: ${tool.price}</p>
                 <p className="text-white">{tool.description}</p>
                 <p className="flex">

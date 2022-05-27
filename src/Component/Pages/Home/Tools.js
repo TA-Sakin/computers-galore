@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineRight } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import useTools from "../../../hooks/useTools";
 
 const Tools = () => {
@@ -18,7 +19,7 @@ const Tools = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center mx-auto">
         {tools.slice(0, 3).map((tool) => (
           <>
-            <div class="card card-compact bg-base-100 mb-12 rounded-none w-[350px] sm:w-96 shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl duration-300">
+            <div className="card card-compact bg-base-100 mb-12 rounded-none w-[350px] sm:w-96 shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl duration-300">
               <figure>
                 <img
                   src={tool.image}
@@ -26,17 +27,19 @@ const Tools = () => {
                   className="bg-black h-[320px] w-full object-cover"
                 />
               </figure>
-              <div class="card-body">
-                <h2 class="card-title">{tool.name}</h2>
+              <div className="card-body">
+                <h2 className="card-title">{tool.name}</h2>
                 <p className="text-xl">Price: ${tool.price}</p>
                 <p>{tool.description}</p>
                 <p>Available quantity: {tool.avail_quantity}</p>
                 <p>Minimum orderable quantity: {tool.min_quantity}</p>
-                <div class="card-actions justify-center">
-                  <button class="btn bg-black rounded-none w-full mt-8">
-                    {/* Shop Now <AiOutlineRight className="ml-1" /> */}
+                <div className="card-actions justify-center">
+                  <Link
+                    className="btn bg-black rounded-none w-full mt-8"
+                    to="purchase"
+                  >
                     Buy Now
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
