@@ -119,12 +119,13 @@ const Login = () => {
                 )}
               </div>
               <span>
-                <b
-                  className="lable-text-alt my-3 label w-1/2 cursor-pointer"
+                <Link
+                  to=""
+                  className="font-bold text-sm link link-hover mb-8 label w-1/2 cursor-pointer"
                   onClick={passwordReset}
                 >
                   Forgot password?
-                </b>
+                </Link>
               </span>
               {signInError}
               <input

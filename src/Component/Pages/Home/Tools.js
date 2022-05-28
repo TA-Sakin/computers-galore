@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useTools from "../../../hooks/useTools";
+import Purchase from "../Purchase/Purchase";
 
 const Tools = () => {
   const [tools] = useTools();
+  const navigate = useNavigate();
+  const [product, setProduct] = useState({});
   return (
     <div className="my-32 lg:px-28">
       <div className="lg:pl-8 lg:text-left px-4 text-center">
@@ -36,7 +39,7 @@ const Tools = () => {
                 <div className="card-actions justify-center">
                   <Link
                     className="btn bg-black rounded-none w-full mt-8"
-                    to="purchase"
+                    to={`purchase/${tool._id}`}
                   >
                     Buy Now
                   </Link>

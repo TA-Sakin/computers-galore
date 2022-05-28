@@ -4,7 +4,7 @@ const useTools = () => {
   const [tools, setTools] = useState([]);
   useEffect(() => {
     const getResults = async () => {
-      const results = await axios("tools.json");
+      const results = await axios("http://localhost:5000/tools");
       setTools(results.data);
     };
     getResults();

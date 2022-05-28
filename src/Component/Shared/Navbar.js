@@ -18,21 +18,41 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/contact">Contact</NavLink>
+        <NavLink to="/blog">Blog</NavLink>
       </li>
       <li>
-        <NavLink to="/about">About</NavLink>
+        <NavLink to="/support">Support</NavLink>
+      </li>
+      <li>
+        <NavLink to="/service">Services</NavLink>
       </li>
       {user ? (
         <>
           <li>
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>
-          <li>
-            <Link to="" onClick={logout}>
-              Logout
-            </Link>
-          </li>
+          <div className="dropdown dropdown-end">
+            <label
+              tabindex="0"
+              className="btn btn-ghost btn-circle avatar placeholder"
+            >
+              <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
+                <span>{user?.displayName?.slice(0, 2)}</span>
+              </div>
+            </label>
+            <ul className="mt-3 p-2 shadow menu dropdown-content bg-gray-900 rounded-box w-52">
+              <li>
+                <Link to="" className="justify-between">
+                  My Profile
+                </Link>
+              </li>
+              <li>
+                <Link to="" onClick={logout}>
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
         </>
       ) : (
         <li>
