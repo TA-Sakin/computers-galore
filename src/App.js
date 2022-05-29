@@ -7,6 +7,10 @@ import Signup from "./Component/Pages/Login/Signup";
 import Purchase from "./Component/Pages/Purchase/Purchase";
 import Navbar from "./Component/Shared/Navbar";
 import NotFound from "./Component/Shared/NotFound";
+import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./Component/Pages/Dashboard/Dashboard";
+import AddReview from "./Component/Pages/Dashboard/AddReview";
+import MyOrder from "./Component/Pages/Dashboard/MyOrder";
 
 function App() {
   return (
@@ -14,7 +18,7 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/home" element={<Home></Home>}></Route>
+        {/* <Route path="/home" element={<Home></Home>}></Route> */}
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route
@@ -25,9 +29,24 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<MyOrder></MyOrder>}></Route>
+          <Route path="addreview" element={<AddReview></AddReview>}></Route>
+        </Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
-      <ToastContainer autoClose={1000} />
+      <ToastContainer
+        autoClose={2000}
+        hideProgressBar={true}
+        pauseOnHover={false}
+      />
     </div>
   );
 }

@@ -13,9 +13,9 @@ const Navbar = () => {
   const menuItems = (
     <>
       <li>
-        <NavLink className="" to="/home">
+        <Link className="" to="/">
           Home
-        </NavLink>
+        </Link>
       </li>
       <li>
         <NavLink to="/blog">Blog</NavLink>
