@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Home from "./Component/Pages/Home/Home";
 import Login from "./Component/Pages/Login/Login";
 import RequireAuth from "./Component/Pages/Login/RequireAuth";
@@ -26,6 +27,7 @@ function App() {
         ></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
+      <ToastContainer autoClose={1000} />
     </div>
   );
 }

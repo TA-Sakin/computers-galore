@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation, useParams } from "react-router-dom";
 import auth from "../../../firebase.init";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Purchase = () => {
   const [user, loading] = useAuthState(auth);
@@ -31,10 +32,19 @@ const Purchase = () => {
   };
   const onSubmit = async (data) => {
     if (data) {
-      setQuantity({ ...quantity, min_quantity: "" });
-      reset();
+      fetch("http://localhost:5000/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            setQuantity({ ...quantity, min_quantity: "" });
+            reset();
+          }
+        });
     }
-    console.log(data);
   };
 
   return (
@@ -175,7 +185,7 @@ const Purchase = () => {
               <div class="form-control mt-6">
                 <input
                   className="btn bg-black rounded-none w-full max-w-sm"
-                  value="Checkout"
+                  value="Order"
                   type="submit"
                 />
               </div>
