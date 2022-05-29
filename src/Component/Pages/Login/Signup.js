@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useToken } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   useSignInWithGoogle,
@@ -18,6 +18,7 @@ const Signup = () => {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   let signInError;
   const navigate = useNavigate();
+  const [token] = useToken(user || guser);
   const {
     register,
     formState: { errors },
@@ -29,7 +30,7 @@ const Signup = () => {
   if (loading || gloading || updating) {
     return <Loading></Loading>;
   }
-  if (user || guser) {
+  if (token) {
     navigate("/");
   }
   const onSubmit = async (data) => {

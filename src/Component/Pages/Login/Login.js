@@ -21,6 +21,7 @@ const Login = () => {
   // const [token] = useToken(user || guser);
   const navigate = useNavigate();
   const location = useLocation();
+  const [token] = useToken(user || guser);
   let from = location.state?.from?.pathname || "/";
   const {
     register,
@@ -28,14 +29,11 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const [email, setEmail] = useState("");
-  // useEffect(() => {
-  //   if (token) {
-  //     navigate(from, { replace: true });
-  //   }
-  // }, [user, guser, from, navigate, token]);
-  if (user || guser) {
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [user, guser, from, navigate, token]);
 
   const handleGoogleLogin = () => {
     signInWithGoogle();

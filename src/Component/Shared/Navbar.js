@@ -13,7 +13,7 @@ const Navbar = () => {
   const menuItems = (
     <>
       <li>
-        <NavLink className="" to="/">
+        <NavLink className="" to="/home">
           Home
         </NavLink>
       </li>

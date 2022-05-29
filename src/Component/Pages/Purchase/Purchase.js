@@ -25,17 +25,18 @@ const Purchase = () => {
     };
     getResults();
   }, [id]);
+
   const handleChange = (e) => {
     setQuantity({ ...quantity, min_quantity: e.target.value });
   };
   const onSubmit = async (data) => {
     if (data) {
       setQuantity({ ...quantity, min_quantity: "" });
-
       reset();
     }
     console.log(data);
   };
+
   return (
     <div class="hero w-full mx-auto ">
       <div class="hero-content flex-col lg:flex-row">
