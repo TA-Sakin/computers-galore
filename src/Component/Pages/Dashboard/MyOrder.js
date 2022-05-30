@@ -1,24 +1,40 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
 import useTools from "../../../hooks/useTools";
 
 const MyOrder = () => {
   const [orders, setOrders] = useState([]);
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const email = user?.email;
   useEffect(() => {
     if (user) {
       fetch(`http://localhost:5000/order?email=${email}`, {
         method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 401) {
+            signOut(auth);
+            localStorage.removeItem("accessToken");
+            navigate("/");
+          } else if (res.status === 403) {
+            navigate("/");
+            return toast.error("Error authorizing, please try login again!");
+          }
+          return res.json();
+        })
         .then((data) => {
-          console.log(data);
           setOrders(data);
         });
     }
-  }, [email, user]);
+  }, [email, user, navigate]);
   return (
     <div>
       <h3 className="text-xl mt-5 mb-3">
@@ -34,6 +50,7 @@ const MyOrder = () => {
                 Price <span className="lowercase">/pc</span>
               </th>
               <th>Quantity</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
