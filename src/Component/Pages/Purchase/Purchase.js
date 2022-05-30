@@ -31,14 +31,21 @@ const Purchase = () => {
     setQuantity({ ...quantity, min_quantity: e.target.value });
   };
   const onSubmit = async (data) => {
-    data.name = user?.displayName;
-    data.email = user?.email;
-    console.log(data);
     if (data) {
+      const order = {
+        username: user?.displayName,
+        email: user?.email,
+        product: tool?.name,
+        ordered_quantity: parseInt(data?.min_quantity),
+        price: tool?.price,
+        image: tool?.image,
+        phone: data.phone,
+        address: data.address,
+      };
       fetch("http://localhost:5000/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(order),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -99,8 +106,6 @@ const Purchase = () => {
                     name="quantity"
                     placeholder="Order quantity"
                     value={quantity?.min_quantity}
-                    // onChange={handleChange}
-                    // value={tool?.min_quantity}
                     class="input input-bordered rounded-none"
                     {...register("min_quantity", {
                       onChange: (e) => handleChange(e),
@@ -109,12 +114,10 @@ const Purchase = () => {
                         message: "Order quantity is required",
                       },
                       min: {
-                        // value: parseInt(tool?.min_quantity),
                         value: tool?.min_quantity,
                         message: `You have to order minimum ${tool?.min_quantity} pc`,
                       },
                       max: {
-                        // value: parseInt(tool?.avail_quantity),
                         value: tool?.avail_quantity,
                         message: "Shortage in stock",
                       },
@@ -151,7 +154,7 @@ const Purchase = () => {
                       },
                       pattern: {
                         value: /^(?:(?:\+|00)88|01)?\d{11}$/,
-                        message: "Provide a valid phone number",
+                        message: "Provide a valid BD phone number",
                       },
                     })}
                   />
