@@ -4,7 +4,9 @@ const useTools = () => {
   const [tools, setTools] = useState([]);
   useEffect(() => {
     const getResults = async () => {
-      const results = await axios("http://localhost:5000/tools");
+      const results = await axios(
+        "https://stark-caverns-79279.herokuapp.com/tools"
+      );
       setTools(results.data);
     };
     getResults();
