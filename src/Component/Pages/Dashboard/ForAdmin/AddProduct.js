@@ -27,13 +27,13 @@ const AddProduct = () => {
           const img = result.data.url;
           const tool = {
             name: data.name,
-            price: parseInt(data.price),
-            avail_quantity: parseFloat(data.avail_quantity),
+            price: parseFloat(data.price),
+            avail_quantity: parseInt(data.avail_quantity),
             min_quantity: parseInt(data.min_quantity),
             description: data.description,
             image: img,
           };
-          fetch("http://localhost:5000/tools", {
+          fetch("https://stark-caverns-79279.herokuapp.com/tools", {
             method: "POST",
             headers: {
               "content-type": "application/json",

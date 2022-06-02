@@ -7,7 +7,7 @@ const useTools = () => {
     isLoading,
     refetch,
   } = useQuery("tools", () =>
-    fetch("http://localhost:5000/tools").then((res) => {
+    fetch("https://stark-caverns-79279.herokuapp.com/tools").then((res) => {
       return res.json();
     })
   );

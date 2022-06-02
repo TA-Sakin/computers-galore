@@ -2,7 +2,7 @@ import React from "react";
 import CountUp from "react-countup";
 const BusinessStat = () => {
   return (
-    <div className="text-center my-20">
+    <div className="text-center my-32">
       <div className="stats gap-5 md:w-5/6 stats-vertical  md:stats-horizontal">
         <div className="stat border-0">
           <div className="stat-figure text-primary">

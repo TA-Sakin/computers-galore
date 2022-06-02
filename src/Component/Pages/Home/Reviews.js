@@ -7,7 +7,7 @@ const Reviews = () => {
   const [tools] = useTools([]);
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/review")
+    fetch("https://stark-caverns-79279.herokuapp.com/review")
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -21,7 +21,7 @@ const Reviews = () => {
         What Our Customers Say
       </h1>
       <div
-        className={`carousel py-10 carousel-center mx-auto max-w-full p-4 space-x-4 bg-slate-400 ${
+        className={`carousel py-10 carousel-center mx-auto max-w-full p-4 space-x-4 bg-slate-300 ${
           tools?.length <= 4 && "justify-center"
         }`}
       >

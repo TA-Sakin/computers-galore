@@ -1,22 +1,21 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-const DeleteOrder = ({ cancelOrder, refetch, setCancelOrder }) => {
-  const { _id } = cancelOrder;
-  const handleCancel = () => {
-    fetch(`https://stark-caverns-79279.herokuapp.com/deleteOrder/${_id}`, {
+const DeleteUser = ({ deleteUser, refetch, setDeleteUser }) => {
+  const { _id } = deleteUser;
+  const removeAdmin = () => {
+    fetch(`https://stark-caverns-79279.herokuapp.com/user/admin/${_id}`, {
       method: "DELETE",
       headers: {
+        "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.deletedCount) {
-          toast.success("Order canceled!");
-          setCancelOrder(null);
-          refetch();
-        }
+        toast.success(`User is removed.`);
+        setDeleteUser(null);
+        refetch();
       });
   };
   return (
@@ -25,11 +24,11 @@ const DeleteOrder = ({ cancelOrder, refetch, setCancelOrder }) => {
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">
-            Are you sure you want to cancel the order?
+            Are you sure you want to delete the product?
           </h3>
           <div className="modal-action">
             <button
-              onClick={handleCancel}
+              onClick={removeAdmin}
               className="btn btn-warning btn-sm w-20"
             >
               Yes
@@ -44,4 +43,4 @@ const DeleteOrder = ({ cancelOrder, refetch, setCancelOrder }) => {
   );
 };
 
-export default DeleteOrder;
+export default DeleteUser;

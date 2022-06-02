@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { useHydrate } from "react-query";
 import { toast } from "react-toastify";
 
-const UserTable = ({ user, i, refetch }) => {
-  const { _id, email, role } = user;
+const UserTable = ({ user, i, refetch, setDeleteUser }) => {
+  const { email, role } = user;
+
   const makeAdmin = () => {
-    fetch(`http://localhost:5000/user/admin/${email}`, {
+    fetch(`https://stark-caverns-79279.herokuapp.com/user/admin/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -24,20 +26,23 @@ const UserTable = ({ user, i, refetch }) => {
         }
       });
   };
-  const removeAdmin = () => {
-    fetch(`http://localhost:5000/user/admin/${_id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        refetch();
-        return toast.success(`${user?.name} is removed.`);
-      });
+  const onClickDelete = () => {
+    setDeleteUser(user);
   };
+  // const removeAdmin = () => {
+  //   fetch(`https://stark-caverns-79279.herokuapp.com/user/admin/${_id}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "content-type": "application/json",
+  //       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       refetch();
+  //       return toast.success(`${user?.name} is removed.`);
+  //     });
+  // };
   return (
     <tr>
       <th>
@@ -81,9 +86,13 @@ const UserTable = ({ user, i, refetch }) => {
         )}
       </td>
       <th>
-        <button className="btn btn-xs" onClick={removeAdmin}>
-          Remove Admin
-        </button>
+        <label
+          htmlFor="my-modal-6"
+          className="btn btn-error btn-xs"
+          onClick={onClickDelete}
+        >
+          Remove User
+        </label>
       </th>
     </tr>
   );

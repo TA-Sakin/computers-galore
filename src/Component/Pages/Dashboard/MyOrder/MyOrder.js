@@ -44,7 +44,8 @@ const MyOrder = () => {
   return (
     <div>
       <h3 className="text-xl mt-5 mb-3">
-        You have ordered {orders.length} {orders.length > 1 ? "items" : "item"}.
+        You have ordered {orders.length} {orders?.length > 1 ? "items" : "item"}
+        .
       </h3>
       <div className="overflow-x-auto">
         <table className="table w-full">
@@ -61,7 +62,7 @@ const MyOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, i) => (
+            {orders?.map((order, i) => (
               <OrderTable
                 key={order._id}
                 i={i}

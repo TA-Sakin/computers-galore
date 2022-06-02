@@ -6,17 +6,18 @@ import auth from "../../../../firebase.init";
 import { toast } from "react-toastify";
 import { useQuery } from "react-query";
 import Loading from "../../../Shared/Loading";
+import DeleteUser from "./DeleteUser";
 
 const AllUsers = () => {
   //   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-
+  const [deleteUser, setDeleteUser] = useState(null);
   const {
     data: users,
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("http://localhost:5000/users", {
+    fetch("https://stark-caverns-79279.herokuapp.com/users", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -29,7 +30,7 @@ const AllUsers = () => {
     return <Loading></Loading>;
   }
   //   useEffect(() => {
-  //     fetch("http://localhost:5000/users", {
+  //     fetch("https://stark-caverns-79279.herokuapp.com/users", {
   //       method: "GET",
   //       headers: {
   //         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -55,7 +56,7 @@ const AllUsers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Make Admin</th>
-              <th>Remove Admin</th>
+              <th>Remove User</th>
               <th></th>
             </tr>
           </thead>
@@ -66,11 +67,19 @@ const AllUsers = () => {
                 i={i}
                 refetch={refetch}
                 user={user}
+                setDeleteUser={setDeleteUser}
               ></UserTable>
             ))}
           </tbody>
         </table>
       </div>
+      {deleteUser && (
+        <DeleteUser
+          setDeleteUser={setDeleteUser}
+          deleteUser={deleteUser}
+          refetch={refetch}
+        ></DeleteUser>
+      )}
     </div>
   );
 };

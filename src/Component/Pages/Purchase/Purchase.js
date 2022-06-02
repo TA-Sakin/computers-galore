@@ -46,7 +46,10 @@ const Purchase = () => {
       };
       fetch("https://stark-caverns-79279.herokuapp.com/order", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
         body: JSON.stringify(order),
       })
         .then((res) => res.json())
@@ -65,7 +68,11 @@ const Purchase = () => {
       <div className="hero w-full mx-auto ">
         <div className="hero-content flex-col lg:flex-row">
           <div className="card lg:card-side bg-base-100 border-2">
-            <img className="object-cover" src={tool.image} alt="Shoes" />
+            <img
+              className="object-cover max-w-[350px]"
+              src={tool.image}
+              alt="Shoes"
+            />
             <div className="card-body ">
               <h2 className="card-title">{tool.name}</h2>
               <h3>{tool.description}</h3>

@@ -19,7 +19,7 @@ const AddReview = () => {
         rating: rating,
         description: description,
       };
-      fetch("http://localhost:5000/review", {
+      fetch("https://stark-caverns-79279.herokuapp.com/review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(review),

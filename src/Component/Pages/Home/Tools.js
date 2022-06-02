@@ -56,7 +56,7 @@ const Tools = () => {
             to="/alltools"
             className="btn-link underline font-semibold flex justify-end"
           >
-            See All Tools{" "}
+            See All Products{" "}
             <BsArrowRightShort className=" text-2xl"></BsArrowRightShort>
           </Link>
         </div>
