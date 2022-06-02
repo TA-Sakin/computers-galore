@@ -13,7 +13,7 @@ const AllTools = () => {
         </h1>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center mx-auto">
-        {tools?.slice(0, 3).map((tool) => (
+        {tools?.map((tool) => (
           <>
             <div className="card card-compact bg-base-100 mb-12 rounded-none w-[350px] sm:w-96 shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl duration-300">
               <figure>

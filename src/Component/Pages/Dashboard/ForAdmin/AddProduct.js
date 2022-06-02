@@ -10,50 +10,48 @@ const AddProduct = () => {
     reset,
   } = useForm();
 
-  const imageSecretKey = "85af4a16326eb6123558d198cba862d3";
-  const onSubmit = (data) => {
+  const imgStorageKey = "85af4a16326eb6123558d198cba862d3";
+
+  const onSubmit = async (data) => {
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
-
-    if (data) {
-      console.log(data);
-      fetch(`https://api.imgbb.com/1/upload?key=${imageSecretKey}`, {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            const img = data.data.url;
-            const tool = {
-              name: data.name,
-              price: parseInt(data.price),
-              avail_quantity: data.avail_quantity,
-              min_quantity: data.min_quantity,
-              description: data.description,
-              image: img,
-            };
-            fetch("http://localhost:5000/tools", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-              },
-              body: JSON.stringify(tool),
-            })
-              .then((res) => res.json())
-              .then((inserted) => {
-                if (inserted.insertedId) {
-                  toast.success("Product added successfully");
-                  reset();
-                } else {
-                  toast.error("Failed to add a product");
-                }
-              });
-          }
-        });
-    }
+    const url = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          const img = result.data.url;
+          const tool = {
+            name: data.name,
+            price: parseInt(data.price),
+            avail_quantity: parseFloat(data.avail_quantity),
+            min_quantity: parseInt(data.min_quantity),
+            description: data.description,
+            image: img,
+          };
+          fetch("http://localhost:5000/tools", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(tool),
+          })
+            .then((res) => res.json())
+            .then((inserted) => {
+              if (inserted.insertedId) {
+                toast.success("Product added successfully");
+                reset();
+              } else {
+                toast.error("Failed to add a product");
+              }
+            });
+        }
+      });
   };
   return (
     <div>
@@ -171,11 +169,11 @@ const AddProduct = () => {
             </div>
 
             <div className="form-control mt-6">
-              <div class="flex justify-center">
-                <div class="mb-3 w-96">
+              <div className="flex justify-center">
+                <div className="mb-3 w-96">
                   <label
-                    for="formFile"
-                    class="form-label inline-block mb-2 text-gray-700"
+                    htmlFor="formFile"
+                    className="form-label inline-block mb-2 text-gray-700"
                   >
                     Input a product image
                   </label>

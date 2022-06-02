@@ -7,9 +7,11 @@ import axios from "axios";
 import OrderTable from "../MyOrder/OrderTable";
 import { useQuery } from "react-query";
 import Loading from "../../../Shared/Loading";
+import DeleteProduct from "./DeleteProduct";
 
 const ManageProducts = () => {
   const [tools, isLoading, refetch] = useTools();
+  const [deleteProduct, setDeleteProduct] = useState(null);
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -19,8 +21,8 @@ const ManageProducts = () => {
       <Link to="add" className="btn bg-black my-3 text-white rounded-none">
         <IoMdAdd className="text-2xl mr-2 font-bold"></IoMdAdd> Add New Product
       </Link>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th className="font-bold text-lg">#</th>
@@ -34,11 +36,23 @@ const ManageProducts = () => {
           </thead>
           <tbody>
             {tools.map((tool, i) => (
-              <ProductTable tool={tool} i={i} key={tool._id}></ProductTable>
+              <ProductTable
+                tool={tool}
+                i={i}
+                key={tool._id}
+                setDeleteProduct={setDeleteProduct}
+              ></ProductTable>
             ))}
           </tbody>
         </table>
       </div>
+      {deleteProduct && (
+        <DeleteProduct
+          setDeleteProduct={setDeleteProduct}
+          deleteProduct={deleteProduct}
+          refetch={refetch}
+        ></DeleteProduct>
+      )}
     </div>
   );
 };

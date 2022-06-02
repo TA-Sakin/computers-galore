@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProductTable = ({ tool, i }) => {
+const ProductTable = ({ tool, i, setDeleteProduct }) => {
   const { image, name, price, min_quantity, avail_quantity } = tool;
+  const onClickDelete = () => {
+    setDeleteProduct(tool);
+  };
   return (
     <tr>
       <th>
@@ -10,14 +13,14 @@ const ProductTable = ({ tool, i }) => {
           <span>{i + 1}</span>
         </label>
       </th>
-      <td class="flex items-center space-x-3 ">
+      <td className="flex items-center space-x-3 ">
         <img
           src={image}
           className="w-12 h-12"
           alt="Avatar Tailwind CSS Component"
         />
         <p>
-          <span class="font-bold">{name}</span>
+          <span className="font-bold">{name}</span>
         </p>
       </td>
       <td>
@@ -32,7 +35,13 @@ const ProductTable = ({ tool, i }) => {
         </Link>
       </td>
       <td>
-        <button className="btn btn-sm btn-error ">DELETE</button>
+        <label
+          htmlFor="my-modal-6"
+          className="btn btn-warning btn-sm"
+          onClick={onClickDelete}
+        >
+          Delete
+        </label>
       </td>
     </tr>
   );

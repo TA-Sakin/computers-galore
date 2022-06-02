@@ -34,7 +34,6 @@ const Purchase = () => {
   // };
   const onSubmit = (data) => {
     if (data) {
-      console.log(data);
       const order = {
         username: user?.displayName,
         email: user?.email,
