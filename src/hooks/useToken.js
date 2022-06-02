@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
 
 const useToken = (user) => {
   const [token, setToken] = useState("");
   useEffect(() => {
     const email = user?.user?.email;
-    const currentUser = { email };
+    const name = user?.user?.displayName;
+    const currentUser = { email, name };
     if (email) {
       fetch(`https://stark-caverns-79279.herokuapp.com/user/${email}`, {
         method: "PUT",

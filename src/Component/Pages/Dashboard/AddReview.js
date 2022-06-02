@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import ReactStars from "react-rating-stars-component";
 import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
 const AddReview = () => {
   const [rating, setRating] = useState(5);
+  const [user] = useAuthState(auth);
   // const [review, setReview] = useState([]);
   const ratingChanged = (newRating) => {
     setRating(newRating);
@@ -12,6 +15,7 @@ const AddReview = () => {
     const description = e.target.desc.value;
     if (rating) {
       const review = {
+        name: user?.displayName,
         rating: rating,
         description: description,
       };
@@ -23,7 +27,8 @@ const AddReview = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data) {
-            toast.success("Thanks for your review.");
+            toast.success("Thanks for your feedback.");
+            e.target.reset();
           }
         });
     }
@@ -31,30 +36,36 @@ const AddReview = () => {
 
   return (
     <div>
-      <h3>Rate our product</h3>
+      <h3 className="mt-3 mb-5">Rate our product</h3>
       <div>
-        <p>
-          <ReactStars
-            value={5}
-            edit={true}
-            onChange={ratingChanged}
-            size={24}
-            a11y={true}
-            activeColor="#ffd700"
-          />
-          <form onSubmit={handleSubmit}>
-            <textarea
-              type="text"
-              name="desc"
-              placeholder="Review"
-              class="input input-bordered w-full max-w-xs"
+        <div className="flex mb-1">
+          <p className="mt-2 font-bold">Rating: </p>
+          <p>
+            <ReactStars
+              value={5}
+              edit={true}
+              onChange={ratingChanged}
+              size={24}
+              a11y={true}
+              activeColor="#ffb700"
             />
-            <input type="submit" value="Submit" className="btn btn-primary" />
-          </form>
-        </p>
+          </p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            type="text"
+            name="desc"
+            placeholder="Write your feedback"
+            className="input input-bordered w-full max-w-xs h-32"
+          />
+          <input
+            type="submit"
+            value="Submit"
+            className="btn btn-primary flex"
+          />
+        </form>
       </div>
     </div>
   );
 };
-// https://meet.google.com/fkd-rmhz-zqw
 export default AddReview;

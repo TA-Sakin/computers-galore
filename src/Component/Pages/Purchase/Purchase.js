@@ -29,11 +29,12 @@ const Purchase = () => {
     getResults();
   }, [id]);
 
-  const handleChange = (e) => {
-    setQuantity({ ...quantity, min_quantity: e.target.value });
-  };
-  const onSubmit = async (data) => {
+  // const handleChange = (e) => {
+  //   setQuantity((quantity) => ({ ...quantity, min_quantity: e.target.value }));
+  // };
+  const onSubmit = (data) => {
     if (data) {
+      console.log(data);
       const order = {
         username: user?.displayName,
         email: user?.email,
@@ -62,55 +63,59 @@ const Purchase = () => {
 
   return (
     <div>
-      <div class="hero w-full mx-auto ">
-        <div class="hero-content flex-col lg:flex-row">
-          <div class="card lg:card-side bg-base-100 border-2">
+      <div className="hero w-full mx-auto ">
+        <div className="hero-content flex-col lg:flex-row">
+          <div className="card lg:card-side bg-base-100 border-2">
             <img className="object-cover" src={tool.image} alt="Shoes" />
-            <div class="card-body ">
-              <h2 class="card-title">{tool.name}</h2>
+            <div className="card-body ">
+              <h2 className="card-title">{tool.name}</h2>
               <h3>{tool.description}</h3>
               <h3 className="text-lg">Price: ${tool.price}</h3>
               <h3>Available product: {tool.avail_quantity}</h3>
               <h3>Minmum orderable: {tool.min_quantity}</h3>
             </div>
           </div>
-          <div class="card flex-shrink-0 w-full max-w-md bg-base-100">
-            <div class="card-body">
+          <div className="card flex-shrink-0 w-full max-w-md bg-base-100">
+            <div className="card-body">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Name</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Name</span>
                   </label>
                   <input
                     readOnly
                     type="name"
                     value={user?.displayName}
-                    class="input input-bordered rounded-none"
+                    className="input input-bordered rounded-none"
                   />
                 </div>
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Email</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Email</span>
                   </label>
                   <input
                     readOnly
                     type="text"
                     value={user?.email}
-                    class="input input-bordered rounded-none"
+                    className="input input-bordered rounded-none"
                   />
                 </div>
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Quantity</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Quantity</span>
                   </label>
                   <input
                     type="number"
                     name="quantity"
                     placeholder="Order quantity"
                     value={quantity?.min_quantity}
-                    class="input input-bordered rounded-none"
+                    className="input input-bordered rounded-none"
                     {...register("min_quantity", {
-                      onChange: (e) => handleChange(e),
+                      onChange: (e) =>
+                        setQuantity((quantity) => ({
+                          ...quantity,
+                          min_quantity: e.target.value,
+                        })),
                       required: {
                         value: true,
                         message: "Order quantity is required",
@@ -141,13 +146,13 @@ const Purchase = () => {
                     </span>
                   )}
                 </div>
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Phone</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Phone</span>
                   </label>
                   <input
                     type="text"
-                    class="input input-bordered rounded-none"
+                    className="input input-bordered rounded-none"
                     placeholder="Phone number"
                     {...register("phone", {
                       required: {
@@ -171,14 +176,14 @@ const Purchase = () => {
                     </span>
                   )}
                 </div>
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Address</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Address</span>
                   </label>
                   <input
                     placeholder="Your address"
                     type="text"
-                    class="input input-bordered rounded-none"
+                    className="input input-bordered rounded-none"
                     {...register("address", {
                       required: {
                         value: true,
@@ -192,7 +197,7 @@ const Purchase = () => {
                     </span>
                   )}
                 </div>
-                <div class="form-control mt-6">
+                <div className="form-control mt-6">
                   <input
                     className="btn bg-black rounded-none w-full max-w-sm"
                     value="Order"

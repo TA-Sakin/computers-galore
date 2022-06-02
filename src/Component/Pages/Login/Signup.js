@@ -1,4 +1,6 @@
-import React, { useToken } from "react";
+import React from "react";
+import useToken from "../../../hooks/useToken";
+
 import { Link, useNavigate } from "react-router-dom";
 import {
   useSignInWithGoogle,
@@ -16,9 +18,10 @@ const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  const [token] = useToken(user || guser);
   let signInError;
   const navigate = useNavigate();
-  const [token] = useToken(user || guser);
   const {
     register,
     formState: { errors },
@@ -27,16 +30,17 @@ const Signup = () => {
   const handleGoogleLogin = () => {
     signInWithGoogle();
   };
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+  };
   if (loading || gloading || updating) {
     return <Loading></Loading>;
   }
   if (token) {
     navigate("/");
   }
-  const onSubmit = async (data) => {
-    await createUserWithEmailAndPassword(data.email, data.password);
-    // await updateProfile({ displayName: data.name });
-  };
+
   if (error || gerror || updateError) {
     signInError = (
       <p className="text-red-500 capitalize">

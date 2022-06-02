@@ -1,17 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 const useTools = () => {
-  const [tools, setTools] = useState([]);
-  useEffect(() => {
-    const getResults = async () => {
-      const results = await axios(
-        "https://stark-caverns-79279.herokuapp.com/tools"
-      );
-      setTools(results.data);
-    };
-    getResults();
-  }, []);
-  return [tools];
+  const {
+    data: tools,
+    isLoading,
+    refetch,
+  } = useQuery("tools", () =>
+    fetch("http://localhost:5000/tools").then((res) => {
+      return res.json();
+    })
+  );
+  return [tools, isLoading, refetch];
 };
 
 export default useTools;
