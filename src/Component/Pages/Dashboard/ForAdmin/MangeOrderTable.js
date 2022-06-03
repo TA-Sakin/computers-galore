@@ -24,7 +24,7 @@ const ManageOrderTable = ({ order, refetch, i }) => {
     const delivered = {
       delivered: !shipped,
     };
-    fetch(`https://stark-caverns-79279.herokuapp.com/manageorder/${_id}`, {
+    fetch(`http://localhost:5000/manageorder/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

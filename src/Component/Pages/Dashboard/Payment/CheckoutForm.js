@@ -11,7 +11,7 @@ const CheckoutForm = ({ order, total }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   useEffect(() => {
-    fetch(`https://stark-caverns-79279.herokuapp.com/create-payment-intent`, {
+    fetch(`http://localhost:5000/create-payment-intent`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -66,7 +66,7 @@ const CheckoutForm = ({ order, total }) => {
         total: total,
         transactionId: paymentIntent.id,
       };
-      fetch(`https://stark-caverns-79279.herokuapp.com/order/${_id}`, {
+      fetch(`http://localhost:5000/order/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

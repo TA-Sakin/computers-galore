@@ -7,7 +7,7 @@ const Reviews = () => {
   const [tools] = useTools([]);
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("https://stark-caverns-79279.herokuapp.com/review")
+    fetch("http://localhost:5000/review")
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -25,7 +25,7 @@ const Reviews = () => {
           tools?.length <= 4 && "justify-center"
         }`}
       >
-        {reviews.map((review) => (
+        {reviews?.map((review) => (
           <div className="carousel-item">
             <div className="card w-80 shadow-xl bg-gray-700 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-gray-800 duration-300">
               <div className="avatar placeholder mx-auto mt-3">

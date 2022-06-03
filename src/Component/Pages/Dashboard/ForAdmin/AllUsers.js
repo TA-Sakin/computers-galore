@@ -17,7 +17,7 @@ const AllUsers = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("https://stark-caverns-79279.herokuapp.com/users", {
+    fetch("http://localhost:5000/users", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -30,7 +30,7 @@ const AllUsers = () => {
     return <Loading></Loading>;
   }
   //   useEffect(() => {
-  //     fetch("https://stark-caverns-79279.herokuapp.com/users", {
+  //     fetch("http://localhost:5000/users", {
   //       method: "GET",
   //       headers: {
   //         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -61,7 +61,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, i) => (
+            {users?.map((user, i) => (
               <UserTable
                 key={user._id}
                 i={i}

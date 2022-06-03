@@ -20,9 +20,7 @@ const Purchase = () => {
   } = useForm();
   useEffect(() => {
     const getResults = async () => {
-      const results = await axios(
-        `https://stark-caverns-79279.herokuapp.com/tools/${id}`
-      );
+      const results = await axios(`http://localhost:5000/tools/${id}`);
       setTool(results.data);
       setQuantity(results.data);
     };
@@ -44,7 +42,7 @@ const Purchase = () => {
         phone: data.phone,
         address: data.address,
       };
-      fetch("https://stark-caverns-79279.herokuapp.com/order", {
+      fetch("http://localhost:5000/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

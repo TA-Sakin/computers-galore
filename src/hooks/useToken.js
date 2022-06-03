@@ -9,7 +9,7 @@ const useToken = (user) => {
     const name = user?.user?.displayName;
     const currentUser = { email, name };
     if (email) {
-      fetch(`https://stark-caverns-79279.herokuapp.com/user/${email}`, {
+      fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

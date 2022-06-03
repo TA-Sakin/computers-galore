@@ -17,7 +17,7 @@ const ManageProducts = () => {
   }
   return (
     <div>
-      <h3 className="text-2xl my-3">Manage all products {tools.length}</h3>
+      <h3 className="text-2xl my-3">Manage all products {tools?.length}</h3>
       <Link to="add" className="btn bg-black my-3 text-white rounded-none">
         <IoMdAdd className="text-2xl mr-2 font-bold"></IoMdAdd> Add New Product
       </Link>
@@ -35,7 +35,7 @@ const ManageProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {tools.map((tool, i) => (
+            {tools?.map((tool, i) => (
               <ProductTable
                 tool={tool}
                 i={i}
