@@ -11,20 +11,22 @@ const CheckoutForm = ({ order, total }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:5000/create-payment-intent`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify({ total }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.clientSecret) {
-          setClientSecret(data.clientSecret);
-        }
-      });
+    if (total) {
+      fetch("https://stark-caverns-79279.herokuapp.com/create-payment-intent", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ total }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.clientSecret) {
+            setClientSecret(data.clientSecret);
+          }
+        });
+    }
   }, [total]);
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -66,7 +68,7 @@ const CheckoutForm = ({ order, total }) => {
         total: total,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/order/${_id}`, {
+      fetch(`https://stark-caverns-79279.herokuapp.com/order/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

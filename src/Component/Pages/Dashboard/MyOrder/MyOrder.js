@@ -20,7 +20,7 @@ const MyOrder = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch(`http://localhost:5000/order?email=${email}`, {
+    fetch(`https://stark-caverns-79279.herokuapp.com/order?email=${email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

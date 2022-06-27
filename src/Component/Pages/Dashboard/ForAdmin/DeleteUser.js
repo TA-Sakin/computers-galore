@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const DeleteUser = ({ deleteUser, refetch, setDeleteUser }) => {
   const { _id } = deleteUser;
   const removeAdmin = () => {
-    fetch(`http://localhost:5000/user/admin/${_id}`, {
+    fetch(`https://stark-caverns-79279.herokuapp.com/user/admin/${_id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

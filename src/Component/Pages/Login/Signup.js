@@ -1,5 +1,6 @@
 import React from "react";
 import useToken from "../../../hooks/useToken";
+import { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -18,7 +19,6 @@ const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-
   let signInError;
   const [token] = useToken(user || guser);
   const navigate = useNavigate();

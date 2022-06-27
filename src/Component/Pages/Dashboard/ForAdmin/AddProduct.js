@@ -33,7 +33,7 @@ const AddProduct = () => {
             description: data.description,
             image: img,
           };
-          fetch("http://localhost:5000/tools", {
+          fetch("https://stark-caverns-79279.herokuapp.com/tools", {
             method: "POST",
             headers: {
               "content-type": "application/json",

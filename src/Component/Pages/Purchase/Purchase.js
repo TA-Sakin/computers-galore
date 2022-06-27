@@ -16,21 +16,26 @@ const Purchase = () => {
     register,
     formState: { errors },
     handleSubmit,
+    setValue,
     reset,
   } = useForm();
   useEffect(() => {
     const getResults = async () => {
-      const results = await axios(`http://localhost:5000/tools/${id}`);
+      const results = await axios(
+        `https://stark-caverns-79279.herokuapp.com/tools/${id}`
+      );
       setTool(results.data);
       setQuantity(results.data);
+      setValue("min_quantity", results.data.min_quantity);
     };
     getResults();
-  }, [id]);
+  }, [id, setValue]);
 
   // const handleChange = (e) => {
   //   setQuantity((quantity) => ({ ...quantity, min_quantity: e.target.value }));
   // };
   const onSubmit = (data) => {
+    console.log(data);
     if (data) {
       const order = {
         username: user?.displayName,
@@ -42,7 +47,7 @@ const Purchase = () => {
         phone: data.phone,
         address: data.address,
       };
-      fetch("http://localhost:5000/order", {
+      fetch("https://stark-caverns-79279.herokuapp.com/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +59,7 @@ const Purchase = () => {
         .then((data) => {
           if (data) {
             toast.success("Order completed", { closeOnClick: true });
-            setQuantity({ ...quantity, min_quantity: "" });
+            setQuantity({ ...quantity, min_quantity: tool.min_quantity });
             reset();
           }
         });
@@ -110,19 +115,13 @@ const Purchase = () => {
                   </label>
                   <input
                     type="number"
-                    name="quantity"
                     placeholder="Order quantity"
-                    value={quantity?.min_quantity}
+                    defaultValue={quantity?.min_quantity}
                     className="input input-bordered rounded-none"
                     {...register("min_quantity", {
-                      onChange: (e) =>
-                        setQuantity((quantity) => ({
-                          ...quantity,
-                          min_quantity: e.target.value,
-                        })),
                       required: {
                         value: true,
-                        message: "Order quantity is required",
+                        message: "Phone number is required",
                       },
                       min: {
                         value: tool?.min_quantity,
@@ -164,8 +163,8 @@ const Purchase = () => {
                         message: "Phone number is required",
                       },
                       pattern: {
-                        value: /^(?:(?:\+|00)88|01)?\d{11}$/,
-                        message: "Provide a valid BD phone number",
+                        value: /^[0-9]*$/,
+                        message: "Phone number should contain only digit",
                       },
                     })}
                   />

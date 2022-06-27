@@ -6,7 +6,7 @@ const UserTable = ({ user, i, refetch, setDeleteUser }) => {
   const { email, role } = user;
 
   const makeAdmin = () => {
-    fetch(`http://localhost:5000/user/admin/${email}`, {
+    fetch(`https://stark-caverns-79279.herokuapp.com/user/admin/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -30,7 +30,7 @@ const UserTable = ({ user, i, refetch, setDeleteUser }) => {
     setDeleteUser(user);
   };
   // const removeAdmin = () => {
-  //   fetch(`http://localhost:5000/user/admin/${_id}`, {
+  //   fetch(`https://stark-caverns-79279.herokuapp.com/user/admin/${_id}`, {
   //     method: "DELETE",
   //     headers: {
   //       "content-type": "application/json",

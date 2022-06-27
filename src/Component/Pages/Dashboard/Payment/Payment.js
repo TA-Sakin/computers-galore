@@ -13,7 +13,7 @@ const Payment = () => {
   const [order, setOrder] = useState({});
   let total;
   useEffect(() => {
-    fetch(`http://localhost:5000/order/${id}`, {
+    fetch(`https://stark-caverns-79279.herokuapp.com/order/${id}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -30,7 +30,7 @@ const Payment = () => {
       parseInt(order?.price) * order?.ordered_quantity;
   }
   //   const { data: order, isLoading } = useQuery(["order", id], () => {
-  //     fetch(`http://localhost:5000/order/${id}`, {
+  //     fetch(`https://stark-caverns-79279.herokuapp.com/order/${id}`, {
   //       method: "GET",
   //       headers: {
   //         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

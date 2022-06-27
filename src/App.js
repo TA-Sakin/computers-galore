@@ -12,7 +12,6 @@ import Dashboard from "./Component/Pages/Dashboard/Dashboard";
 import AddReview from "./Component/Pages/Dashboard/AddReview";
 import MyOrder from "./Component/Pages/Dashboard/MyOrder/MyOrder";
 import MyProfile from "./Component/Pages/Dashboard/MyProfile";
-import Portfolio from "./Component/Pages/Portfolio/Portfolio";
 import Payment from "./Component/Pages/Dashboard/Payment/Payment";
 import AllUsers from "./Component/Pages/Dashboard/ForAdmin/AllUsers";
 import ManageOrders from "./Component/Pages/Dashboard/ForAdmin/ManageOrders";
